@@ -2,8 +2,6 @@
 ## System Configuration
 
 ```
-echo "mint" > /linux-version.txt
-
 # disk labels
 e2label device STUDIO_ROOT
 nano /etc/fstab
