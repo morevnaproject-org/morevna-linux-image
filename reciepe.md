@@ -147,8 +147,13 @@ sudo dpkg -i libgoocanvas-common_1.0.0-1_all.deb ; sudo apt-get -f install ; sud
 
 
 # Linux Wacom driver requirements
-apt-get remove xserver-xorg-input-wacom 
 apt-get install linux-headers-$(uname -r) build-essential autoconf pkg-config make xutils-dev libtool xserver-xorg-dev libx11-dev libxi-dev libxrandr-dev libxinerama-dev libudev-dev
+cd /root
+wget https://github.com/linuxwacom/input-wacom/releases/download/input-wacom-0.44.0/input-wacom-0.44.0.tar.bz2
+tar xf input-wacom-0.44.0.tar.bz2
+rm tar xf input-wacom-0.44.0.tar.bz2
+cd input-wacom-0.44.0
+if test -x ./autogen.sh; then ./autogen.sh; else ./configure; fi && make && sudo make install || echo "Build Failed"
 
 # git-lfs
 apt-get install git-lfs
