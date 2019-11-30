@@ -154,7 +154,7 @@ apt-get install linux-headers-$(uname -r) build-essential autoconf pkg-config ma
 cd /root
 wget https://github.com/linuxwacom/input-wacom/releases/download/input-wacom-0.44.0/input-wacom-0.44.0.tar.bz2
 tar xf input-wacom-0.44.0.tar.bz2
-rm tar xf input-wacom-0.44.0.tar.bz2
+rm input-wacom-0.44.0.tar.bz2
 cd input-wacom-0.44.0
 if test -x ./autogen.sh; then ./autogen.sh; else ./configure; fi && make && sudo make install || echo "Build Failed"
 
