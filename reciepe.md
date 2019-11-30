@@ -5,6 +5,8 @@ Base system: Linux Mint 19
 
 
 ```
+echo "mint" > /linux-version.txt
+
 # disk labels
 e2label device STUDIO_ROOT
 nano /etc/fstab
