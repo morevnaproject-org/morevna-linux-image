@@ -1,6 +1,9 @@
 
 ## System Configuration
 
+Base system: Linux Mint 19
+
+
 ```
 # disk labels
 e2label device STUDIO_ROOT
