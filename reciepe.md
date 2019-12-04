@@ -107,7 +107,7 @@ ufw unison-gtk unrar virtualbox-ext-pack vorbis-tools wakeonlan wine-stable wine
 +++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++
 dolphin kde-plasma-desktop kio-extras qt5ct
-ntfs-3g cheese davfs2
+ntfs-3g cheese davfs2 hplip-gui
 +++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++
