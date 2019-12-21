@@ -98,7 +98,7 @@ gamin gimp git git-gui git-lfs gitk geany gnome-disk-utility  gparted \
 homebank hyphen-ru hunspell-ru inkscape jackd2 jekyll \
 kde-config-gtk-style kde-l10n-ru key-mon kphotoalbum krdc  \
 libreoffice libreoffice-l10n-ru mpg123 nemiver nfs-common openssh-server \
-pavucontrol php7.2-cli printer-driver-foo2zjs python3-setuptools revelation \
+pavucontrol php7.2-cli pidgin printer-driver-foo2zjs python3-setuptools revelation \
 mesa-utils \
 shutter smartmontools smplayer sox stow travis \
 ufw unison-gtk unrar virtualbox-ext-pack vorbis-tools wakeonlan wine-stable wine32 wodim xterm
