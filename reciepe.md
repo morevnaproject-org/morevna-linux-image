@@ -15,9 +15,12 @@ nano /etc/fstab
 
 # Убедиться что в настройках Grub стоит правильная система по-умолчанию
 - https://possiblelossofprecision.net/?p=1334
-grep ^menuentry /boot/grub2/grub.cfg | cut -d "'" -f2
+grep ^menuentry /boot/grub/grub.cfg | cut -d "'" -f2
 nano /etc/default/grub
-GRUB_DEFAULT="FULL MENU ENTRY NAME"
+
+> #GRUB_HIDDEN_TIMEOUT=0
+> ...
+> GRUB_DEFAULT="FULL MENU ENTRY NAME"
 
 # Install root ssh keys for Ansible
 ...
@@ -27,7 +30,7 @@ GRUB_DEFAULT="FULL MENU ENTRY NAME"
 
 apt-get install bindfs nfs-common nfs-kernel-server  cachefilesd ecryptfs-utils 
 nano /etc/fstab
-> 192.168.2.2:/home/data /home/data nfs fsc,noauto 0 0
+> 192.168.1.11:/home/data /home/data nfs fsc,noauto 0 0
 nano /etc/default/cachefilesd
 > RUN=yes
 nano /etc/cachefilesd.conf
@@ -37,7 +40,7 @@ chmod u+rwx /home/nfscache
 chmod go-w /home/nfscache
 
 # Скопировать /etc/rc.local
-rsync -azP -H --progress --numeric-ids rsync://rescue@192.168.2.2/studio_root_debian/etc/rc.local /etc/rc.local
+rsync -azP -H --progress --numeric-ids rsync://rescue@192.168.1.11/studio_root_debian/etc/rc.local /etc/rc.local
 
 # Старт rc.local после инициализации сети:
 # https://askubuntu.com/questions/882123/rc-local-only-executing-after-connecting-to-ethernet
@@ -79,6 +82,71 @@ sudo apt-get remove compiz-core
 
 ```
 
+## /etc/rc.local
+
+```
+#[ -f /usr/share/templates/Directory.desktop ] && rm -rf /usr/share/templates/Directory.desktop
+# Afanasy trick
+if [ -f /home/etc/hostname ]; then
+	cp /home/etc/hostname /etc/hostname
+fi
+# rsync daemon (stopped by default)
+ufw allow 873
+if [ -d /home/apt-upgrade ]; then
+	mount -o bind /home/apt-upgrade /var/cache/apt/archives/
+fi
+# sudoers
+[ -d /home/etc/ ] || mkdir /home/etc/
+if [ -f /home/etc/owner ]; then
+chmod ug-rwx /home/etc/owner
+chown root /home/etc/owner
+GROUPFILE=/etc/group
+USERS=$(head -n 1 /home/etc/owner)
+sed -i "s/adm:x:4:.*/adm:x:4:$USERS/g" $GROUPFILE
+sed -i "s/sudo:x:27:.*/sudo:x:27:$USERS/g" $GROUPFILE
+sed -i "s/lpadmin:x:115:.*/lpadmin:x:115:$USERS/g" $GROUPFILE
+sed -i "s/sambashare:x:130:.*/sambashare:x:130:$USERS/g" $GROUPFILE
+fi
+if [ -e /home/etc/rc.local ]; then
+	bash /home/etc/rc.local
+fi
+# NFS Cache
+if [ ! -d /home/nfscache ]; then
+mkdir /home/nfscache
+chmod u+rwx /home/nfscache
+chmod go-w /home/nfscache
+fi
+[ -d /home/data ] || mkdir /home/data
+if [ -f /home/etc/nfs ]; then
+mount /home/data || true
+/etc/init.d/afrender start || true
+#	a=0
+#	while [ $a -le 3 ]; do
+#	if ( ping -c 1 -w 2 192.168.1.11 ); then
+#		mount /home/data || true
+#		break
+#	fi
+#	a=$(($a+1))
+#	done
+fi
+# Mount directory layout for each user
+if [ -f /tools/mount_dirs.sh  ]; then
+	bash /tools/mount_dirs.sh || true
+else
+	if [ -f /home/data/sync/tools/mount_dirs.sh ]; then
+		bash /home/data/sync/tools/mount_dirs.sh || true
+	fi
+fi
+# Syncthing
+if [ ! -f /home/etc/owner ]; then
+#for USERNAME in `cat /home/etc/owner`; do
+#	systemctl start syncthing@${USERNAME}.service || true
+#done
+#else
+	touch /home/etc/owner
+fi
+exit 0
+```
 
 
 ## Набор программ
@@ -90,7 +158,7 @@ deb-src http://debian.mirrors.ovh.net/debian/ jessie-backports main contrib non-
 ```
 
 ```
-apt-get install audacity bindfs cachefilesd calf-plugins \
+apt-get install 0install audacity bindfs cachefilesd calf-plugins \
 caja-actions caja-rename cmake \
 dconf-editor digikam docker docker.io \
 ecryptfs-utils exfat-fuse exfat-utils  filelight fileschanged ffmpeg flac formiko \
@@ -99,7 +167,7 @@ homebank hyphen-ru hunspell-ru inkscape jackd2 jekyll \
 kde-config-gtk-style kde-l10n-ru key-mon kphotoalbum krdc  \
 libreoffice libreoffice-l10n-ru mpg123 nemiver nfs-common openssh-server \
 pavucontrol php7.2-cli pidgin printer-driver-foo2zjs python3-setuptools revelation \
-mesa-utils \
+mesa-utils owncloud-client \
 samba-client shutter smartmontools smplayer sox stow travis \
 ufw unison-gtk unrar virtualbox-ext-pack vorbis-tools wakeonlan wine-stable wine32 wodim xterm
 
@@ -183,7 +251,7 @@ sed -i 's/export BLENDER_LOCATION=.\+/export BLENDER_LOCATION="\/tools\/bin\/"/'
 nano /opt/cgru/config.json
 ===========================
 {"cgru_config":{
-	"af_servername":"192.168.2.2",
+	"af_servername":"192.168.1.11",
 
 "":"Render:",
 
@@ -226,6 +294,9 @@ https://turbovnc.org/
 
 #Chrome
 https://www.google.ru/intl/ru/chrome/
+
+#Zoom
+https://zoom.us/download#client_4meeting
 
 #KitScenarist
 https://kitscenarist.ru/download.html
