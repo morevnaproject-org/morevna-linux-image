@@ -169,7 +169,7 @@ libreoffice libreoffice-l10n-ru mpg123 nemiver nfs-common openssh-server \
 pavucontrol php7.2-cli pidgin printer-driver-foo2zjs python3-setuptools revelation \
 mesa-utils owncloud-client \
 samba-client shutter smartmontools smplayer sox stow travis \
-ufw unison-gtk unrar virtualbox-ext-pack vorbis-tools wakeonlan wine-stable wine32 wodim xterm
+ufw unison-gtk unrar vorbis-tools wakeonlan wine-stable wine32 wodim xterm
 
 +++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++
@@ -191,6 +191,8 @@ apt-get remove gstreamer1.0-plugins-bad
 sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
+# VirtualBox
+https://www.virtualbox.org/wiki/Linux_Downloads
 
 # Iphone
 apt install ideviceinstaller python-imobiledevice libimobiledevice-utils python-plist ifuse
