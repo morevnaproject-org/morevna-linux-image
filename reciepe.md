@@ -153,7 +153,9 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 
 # VirtualBox
-https://www.virtualbox.org/wiki/Linux_Downloads
+# https://www.virtualbox.org/wiki/Linux_Downloads
+https://download.virtualbox.org/virtualbox/6.1.18/virtualbox-6.1_6.1.18-142142~Ubuntu~bionic_amd64.deb
+https://download.virtualbox.org/virtualbox/6.1.18/Oracle_VM_VirtualBox_Extension_Pack-6.1.18.vbox-extpack
 
 # Iphone
 apt install ideviceinstaller python-imobiledevice libimobiledevice-utils python-plist ifuse
