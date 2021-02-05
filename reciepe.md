@@ -50,11 +50,31 @@ nano /etc/systemd/system/rc-local.service
 > After=network-online.target
 > Wants=network-online.target
 
+touch /etc/rc.local
+chmod +x /etc/rc.local
 nano /etc/rc.local
-==================
+```
 
-==================
+/etc/rc.local:
 
+```
+#!/bin/bash
+
+# NFS Cache
+if [ ! -d /home/nfscache ]; then
+mkdir /home/nfscache
+chmod u+rwx /home/nfscache
+chmod go-w /home/nfscache
+fi
+
+if [ -e /home/etc/rc.local ]; then
+bash /home/etc/rc.local
+fi
+
+exit 0
+```
+
+```
 systemctl enable NetworkManager-wait-online # on Debian 8
 
 
@@ -88,24 +108,6 @@ sudo apt-get remove compiz-core
 
 ```
 
-## /etc/rc.local
-
-```
-#!/bin/bash
-
-# NFS Cache
-if [ ! -d /home/nfscache ]; then
-mkdir /home/nfscache
-chmod u+rwx /home/nfscache
-chmod go-w /home/nfscache
-fi
-
-if [ -e /home/etc/rc.local ]; then
-bash /home/etc/rc.local
-fi
-
-exit 0
-```
 
 
 ## Набор программ
