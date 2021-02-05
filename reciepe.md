@@ -29,8 +29,8 @@ nano /etc/default/grub
 # Настроить NFS-Cache
 
 apt-get install bindfs nfs-common nfs-kernel-server  cachefilesd ecryptfs-utils 
-nano /etc/fstab
-> 192.168.1.11:/home/data /home/data nfs fsc,noauto 0 0
+#nano /etc/fstab
+#> 192.168.1.11:/home/data /home/data nfs fsc,noauto 0 0
 nano /etc/default/cachefilesd
 > RUN=yes
 nano /etc/cachefilesd.conf
