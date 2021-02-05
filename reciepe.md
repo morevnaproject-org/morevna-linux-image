@@ -49,6 +49,12 @@ cp /lib/systemd/system/rc-local.service /etc/systemd/system/
 nano /etc/systemd/system/rc-local.service
 > After=network-online.target
 > Wants=network-online.target
+
+nano /etc/rc.local
+==================
+
+==================
+
 systemctl enable NetworkManager-wait-online # on Debian 8
 
 
@@ -85,66 +91,19 @@ sudo apt-get remove compiz-core
 ## /etc/rc.local
 
 ```
-#[ -f /usr/share/templates/Directory.desktop ] && rm -rf /usr/share/templates/Directory.desktop
-# Afanasy trick
-if [ -f /home/etc/hostname ]; then
-	cp /home/etc/hostname /etc/hostname
-fi
-# rsync daemon (stopped by default)
-ufw allow 873
-if [ -d /home/apt-upgrade ]; then
-	mount -o bind /home/apt-upgrade /var/cache/apt/archives/
-fi
-# sudoers
-[ -d /home/etc/ ] || mkdir /home/etc/
-if [ -f /home/etc/owner ]; then
-chmod ug-rwx /home/etc/owner
-chown root /home/etc/owner
-GROUPFILE=/etc/group
-USERS=$(head -n 1 /home/etc/owner)
-sed -i "s/adm:x:4:.*/adm:x:4:$USERS/g" $GROUPFILE
-sed -i "s/sudo:x:27:.*/sudo:x:27:$USERS/g" $GROUPFILE
-sed -i "s/lpadmin:x:115:.*/lpadmin:x:115:$USERS/g" $GROUPFILE
-sed -i "s/sambashare:x:130:.*/sambashare:x:130:$USERS/g" $GROUPFILE
-fi
-if [ -e /home/etc/rc.local ]; then
-	bash /home/etc/rc.local
-fi
+#!/bin/bash
+
 # NFS Cache
 if [ ! -d /home/nfscache ]; then
 mkdir /home/nfscache
 chmod u+rwx /home/nfscache
 chmod go-w /home/nfscache
 fi
-[ -d /home/data ] || mkdir /home/data
-if [ -f /home/etc/nfs ]; then
-mount /home/data || true
-/etc/init.d/afrender start || true
-#	a=0
-#	while [ $a -le 3 ]; do
-#	if ( ping -c 1 -w 2 192.168.1.11 ); then
-#		mount /home/data || true
-#		break
-#	fi
-#	a=$(($a+1))
-#	done
+
+if [ -e /home/etc/rc.local ]; then
+bash /home/etc/rc.local
 fi
-# Mount directory layout for each user
-if [ -f /tools/mount_dirs.sh  ]; then
-	bash /tools/mount_dirs.sh || true
-else
-	if [ -f /home/data/sync/tools/mount_dirs.sh ]; then
-		bash /home/data/sync/tools/mount_dirs.sh || true
-	fi
-fi
-# Syncthing
-if [ ! -f /home/etc/owner ]; then
-#for USERNAME in `cat /home/etc/owner`; do
-#	systemctl start syncthing@${USERNAME}.service || true
-#done
-#else
-	touch /home/etc/owner
-fi
+
 exit 0
 ```
 
