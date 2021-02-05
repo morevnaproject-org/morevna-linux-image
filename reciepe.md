@@ -261,6 +261,9 @@ https://www.google.ru/intl/ru/chrome/
 #Zoom
 https://zoom.us/download#client_4meeting
 
+#Discord
+https://discord.com/
+
 #KitScenarist
 https://kitscenarist.ru/download.html
 
