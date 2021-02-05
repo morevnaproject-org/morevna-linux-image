@@ -165,6 +165,11 @@ add-apt-repository ppa:alex-p/aegisub
 apt-get update
 apt-get install aegisub
 
+# Nextcloud
+sudo add-apt-repository ppa:nextcloud-devs/client
+sudo apt-get update
+apt install nextcloud-desktop
+
 # Mypaint
 apt-get install g++ python-dev libglib2.0-dev python-numpy python-gtk2-dev swig scons gettext liblcms2-dev libjson-c-dev 
 cp /usr/lib/x86_64-linux-gnu/pkgconfig/json-c.pc /usr/lib/x86_64-linux-gnu/pkgconfig/json.pc
