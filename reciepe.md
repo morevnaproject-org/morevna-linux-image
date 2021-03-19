@@ -280,8 +280,12 @@ https://discord.com/
 #KitScenarist
 https://kitscenarist.ru/download.html
 
+#Opera
+https://www.opera.com/
+
 # AverMedia driver - https://www.qsl.net/ew1ln/cx231xx.html
 nano /etc/udev/rules.d/usb_ezmaker.rules
+
 =================================
 # load cx231xx for DVD EZMaker7
 
@@ -294,6 +298,8 @@ ACTION=="remove", SUBSYSTEMS=="usb", ATTRS{idVendor}=="07ca", ATTRS{idProduct}==
 RUN+="/sbin/rmmod cx231xx_alsa", RUN+="/sbin/rmmod cx231xx", \
 RUN+="/bin/sh -c 'echo 07ca c039 > /sys/bus/usb/drivers/cx231xx/remove_id'"
 =================================
+
+
 ```
 
 ## Файлы настроек
