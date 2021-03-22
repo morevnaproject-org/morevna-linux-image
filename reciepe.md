@@ -130,7 +130,7 @@ libreoffice libreoffice-l10n-ru mpg123 nemiver nfs-common openssh-server \
 pavucontrol php7.2-cli pidgin printer-driver-foo2zjs python3-setuptools revelation \
 mesa-utils owncloud-client \
 samba-client shutter smartmontools smplayer sox stow travis \
-ufw unison-gtk unrar vorbis-tools wakeonlan wine-stable wine32 wodim xterm
+ufw unison-gtk unrar vorbis-tools vlc wakeonlan wine-stable wine32 wodim xterm
 
 +++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++
