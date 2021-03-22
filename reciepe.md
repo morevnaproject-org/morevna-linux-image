@@ -132,6 +132,7 @@ mesa-utils owncloud-client \
 samba-client shutter smartmontools smplayer sox stow travis \
 ufw unison-gtk unrar vorbis-tools vlc wakeonlan wine-stable wine32 wodim xterm
 
+
 +++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++
@@ -140,6 +141,9 @@ ntfs-3g cheese davfs2 hplip-gui
 +++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++
+
+# Synfig libs
+libxml++2.6-2v5
 
 # Debian 8:
 gtk2-engines-oxygen gtk3-engines-oxygen  nvidia-detect
