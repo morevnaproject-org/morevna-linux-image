@@ -208,10 +208,10 @@ dpkg -i digimend-dkms_10_all.deb
 # Linux Wacom driver requirements
 apt-get install linux-headers-$(uname -r) build-essential autoconf pkg-config make xutils-dev libtool xserver-xorg-dev libx11-dev libxi-dev libxrandr-dev libxinerama-dev libudev-dev
 cd /root
-wget https://github.com/linuxwacom/input-wacom/releases/download/input-wacom-0.47.0/input-wacom-0.47.0.tar.bz2
-tar xf input-wacom-0.47.0.tar.bz2
-rm input-wacom-0.47.0.tar.bz2
-cd input-wacom-0.47.0
+wget https://github.com/linuxwacom/input-wacom/releases/download/input-wacom-0.48.0/input-wacom-0.48.0.tar.bz2
+tar xf input-wacom-0.48.0.tar.bz2
+rm input-wacom-0.48.0.tar.bz2
+cd input-wacom-0.48.0
 if test -x ./autogen.sh; then ./autogen.sh; else ./configure; fi && make && sudo make install || echo "Build Failed"
 
 # git-lfs
