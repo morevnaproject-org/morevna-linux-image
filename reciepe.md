@@ -136,7 +136,8 @@ ufw unison-gtk unrar vorbis-tools vlc wakeonlan wine-stable wine32 wodim xterm
 +++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++
-dolphin kde-plasma-desktop kio-extras qt5ct
+dolphin kio-extras qt5ct ark
+kde-plasma-desktop
 ntfs-3g cheese davfs2 hplip-gui
 +++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++
