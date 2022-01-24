@@ -119,7 +119,7 @@ deb-src http://debian.mirrors.ovh.net/debian/ jessie-backports main contrib non-
 ```
 
 ```
-apt-get install 0install audacity bindfs cachefilesd calf-plugins \
+apt-get install audacity bindfs cachefilesd calf-plugins \
 caja-actions caja-rename cmake \
 dconf-editor digikam docker docker.io \
 ecryptfs-utils exfat-fuse exfat-utils  filelight fileschanged ffmpeg flac formiko \
@@ -218,6 +218,10 @@ if test -x ./autogen.sh; then ./autogen.sh; else ./configure; fi && make && sudo
 # git-lfs
 apt-get install git-lfs
 https://git-lfs.github.com/
+
+# 0install
+curl -O https://get.0install.net/0install.sh && chmod +x 0install.sh
+sudo ./0install.sh install local
 
 #syncthing
 curl -s https://syncthing.net/release-key.txt | sudo apt-key add -
