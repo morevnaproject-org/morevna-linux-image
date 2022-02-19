@@ -1,0 +1,16 @@
+# ansible-playbook --ask-become-pass '/home/morevna/config-morevna.yml'
+
+- hosts: localhost
+  remote_user: root
+  tasks:
+  - name: Update cache and install packages
+    apt_rpm:
+      state: present
+      update_cache: yes
+      name: 
+       - bindfs
+       - nfs-clients
+       - nfs-server
+       - nfs-utils
+       - cachefilesd
+# ecryptfs-utils
