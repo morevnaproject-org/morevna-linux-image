@@ -1,26 +1,32 @@
 
-## System Configuration
-
 Base system: Linux Mint 19
 
+## Базовая настройка системы
 
 ```
-# disk labels
+# Настроить метки дисков (нужно для упрощения клонирования системы)
 e2label device STUDIO_ROOT
 nano /etc/fstab
 > LABEL=STUDIO_ROOT /               ext4    errors=remount-ro 0       1
 > LABEL=STUDIO_HOME /home           ext4    defaults        0       2
 
-# Убедиться что в настройках Grub стоит правильная система по-умолчанию
-- https://possiblelossofprecision.net/?p=1334
-grep ^menuentry /boot/grub/grub.cfg | cut -d "'" -f2
-nano /etc/default/grub
+```
 
-> #GRUB_HIDDEN_TIMEOUT=0
-> ...
-> GRUB_DEFAULT="FULL MENU ENTRY NAME"
+```
+# Пользователи
 
-# Настроить NFS-Cache
+- morevna - 1111
+- anim - 1001
+
+useradd -m -k /etc/skel/ -s /bin/bash -u 1111 morevna
+passwd morevna
+useradd -m -k /etc/skel/ -s /bin/bash -u 1001 anim
+passwd anim
+
+```
+
+```
+# NFS-Cache
 
 apt-get install bindfs nfs-common nfs-kernel-server  cachefilesd ecryptfs-utils 
 #nano /etc/fstab
@@ -32,7 +38,20 @@ nano /etc/cachefilesd.conf
 mkdir /home/nfscache
 chmod u+rwx /home/nfscache
 chmod go-w /home/nfscache
+```
 
+```
+# Убедиться что в настройках Grub стоит правильная система по-умолчанию
+- https://possiblelossofprecision.net/?p=1334
+grep ^menuentry /boot/grub/grub.cfg | cut -d "'" -f2
+nano /etc/default/grub
+
+> #GRUB_HIDDEN_TIMEOUT=0
+> ...
+> GRUB_DEFAULT="FULL MENU ENTRY NAME"
+```
+
+```
 # Скопировать /etc/rc.local
 rsync -azP -H --progress --numeric-ids rsync://rescue@192.168.1.11/studio_root_debian/etc/rc.local /etc/rc.local
 
@@ -67,22 +86,6 @@ fi
 
 exit 0
 ```
-
-```
-
-
-# Пользователи
-
-- morevna - 1111
-- anim - 1001
-
-useradd -m -k /etc/skel/ -s /bin/bash -u 1111 morevna
-passwd morevna
-useradd -m -k /etc/skel/ -s /bin/bash -u 1001 anim
-passwd anim
-
-```
-
 
 
 ## Набор программ
@@ -279,7 +282,9 @@ RUN+="/bin/sh -c 'echo 07ca c039 > /sys/bus/usb/drivers/cx231xx/remove_id'"
 - /home/etc/hostname - host name
 - /home/etc/rc.local - специфичные настройки
 - /home/etc/nfs - определяет нужно ли монтировать nfs при загрузке
-- /home/etc/windows - должен ли Grub загружать windows по-умолчанию
+
+
+
 
 ## Подготовка рабочего места
 
