@@ -5,8 +5,6 @@ Base system: Linux Mint 19
 
 
 ```
-echo "mint" > /linux-version.txt
-
 # disk labels
 e2label device STUDIO_ROOT
 nano /etc/fstab
@@ -21,10 +19,6 @@ nano /etc/default/grub
 > #GRUB_HIDDEN_TIMEOUT=0
 > ...
 > GRUB_DEFAULT="FULL MENU ENTRY NAME"
-
-# Install root ssh keys for Ansible
-...
-
 
 # Настроить NFS-Cache
 
@@ -75,7 +69,6 @@ exit 0
 ```
 
 ```
-systemctl enable NetworkManager-wait-online # on Debian 8
 
 
 # Пользователи
@@ -88,35 +81,12 @@ passwd morevna
 useradd -m -k /etc/skel/ -s /bin/bash -u 1001 anim
 passwd anim
 
-# Скопировать папку /tools
-- sudo bash /home/data/sync/tools/mount_dirs.sh
-Далее от пользователя "owner":
-- bash /home/data/sync/tools/setup.sh
-- /usr/bin/unison tools -auto -batch
-
-# Отключить эффекты MATE
-# https://sites.google.com/site/easylinuxtipsproject/3#TOC-Turn-off-visual-effects-in-Cinnamon
-
-a. Menu button - Preferences - Windows
-Tab General: deselect: Enable software compositing window manager
-
-b. Menu button - Preferences - Desktop settings
-Click Windows - section Window Manager: set it to plain Marco (instead of Marco + Compositing).
-
-c. Remove Compiz:
-sudo apt-get remove compiz-core
-
 ```
 
 
 
 ## Набор программ
 
-Edit /etc/apt/sources.list, add "contrib" and "non-free" to jessie-backports entry.
-```
-deb http://debian.mirrors.ovh.net/debian/ jessie-backports main contrib non-free
-deb-src http://debian.mirrors.ovh.net/debian/ jessie-backports main contrib non-free
-```
 
 ```
 apt-get install audacity bindfs cachefilesd calf-plugins \
@@ -143,12 +113,6 @@ ntfs-3g cheese davfs2 hplip-gui
 +++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++
 
-# Synfig libs
-libxml++2.6-2v5
-
-# Debian 8:
-gtk2-engines-oxygen gtk3-engines-oxygen  nvidia-detect
-
 # Mint 18.04: gstreamer-plugins-bad crash Caja
 apt-get remove gstreamer1.0-plugins-bad
 
@@ -162,7 +126,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 https://download.virtualbox.org/virtualbox/6.1.18/virtualbox-6.1_6.1.18-142142~Ubuntu~bionic_amd64.deb
 https://download.virtualbox.org/virtualbox/6.1.18/Oracle_VM_VirtualBox_Extension_Pack-6.1.18.vbox-extpack
 
-# Iphone
+# IPhone support
 apt install ideviceinstaller python-imobiledevice libimobiledevice-utils python-plist ifuse
 
 # Aegisub
@@ -224,12 +188,6 @@ https://git-lfs.github.com/
 curl -O https://get.0install.net/0install.sh && chmod +x 0install.sh
 sudo ./0install.sh install local
 
-#syncthing
-curl -s https://syncthing.net/release-key.txt | sudo apt-key add -
-echo "deb https://apt.syncthing.net/ syncthing stable" | sudo tee /etc/apt/sources.list.d/syncthing.list
-sudo apt-get update
-sudo apt-get install syncthing
-
 #Ansible
 http://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
 
@@ -272,10 +230,6 @@ nano /opt/cgru/config.json
 	"":""
 }}
 ===========================
-
-#Ubuntu 18.10
-ln -sf /usr/lib/x86_64-linux-gnu/libpython3.6m.so.1 /usr/lib/x86_64-linux-gnu/libpython3.5m.so.1
-ln -sf /usr/lib/x86_64-linux-gnu/libpython3.6m.so.1.0 /usr/lib/x86_64-linux-gnu/libpython3.5m.so.1.0
 
 /etc/init.d/afrender restart
 /etc/init.d/afserver restart #Server
@@ -322,7 +276,6 @@ RUN+="/bin/sh -c 'echo 07ca c039 > /sys/bus/usb/drivers/cx231xx/remove_id'"
 
 ## Файлы настроек
 
-- /home/etc/owner - определяет имя пользователя владельца
 - /home/etc/hostname - host name
 - /home/etc/rc.local - специфичные настройки
 - /home/etc/nfs - определяет нужно ли монтировать nfs при загрузке
@@ -334,34 +287,8 @@ RUN+="/bin/sh -c 'echo 07ca c039 > /sys/bus/usb/drivers/cx231xx/remove_id'"
 mkdir /home/etc
 chown root /home/etc
 chmod 700 /home/etc/
-echo "konstantin" > /home/etc/owner
 echo "studio-3" > /home/etc/hostname
 ```
-Если не NFS (начало):
-```
-mkdir -p /home/data/sync/
-chown -R `head -n 1 /home/etc/owner` /home/data/sync/
-```
-
-- Установить имя пользователя и пароль Syncthing - http://127.0.0.1:8384/
-- Set default path - /home/data/sync
-- Добавить master (и cloud?), поставить опцию автоматичски добавлять новые шары.
-- Синхронизировать "tools" в "/home/data/sync/tools"
-
-Если не NFS (конец)
-
-
-
-От пользователя owner:
-
-```
-- sudo bash /home/data/sync/tools/mount_dirs.sh
-- bash /home/data/sync/tools/setup.sh
-- /usr/bin/unison-2.40 tools -auto -batch
-- sudo -u morevna bash /home/morevna/tools/setup.sh
-```
-
-Перелогиниться.
 
 Если NFS (начало)
 
@@ -371,33 +298,8 @@ chown -R `head -n 1 /home/etc/owner` /home/data/sync/
 Если NFS (конец)
 
 
-## Cкрипт запуска системы
-
-- установить имя хоста (хак для Afanasy)
-- запустить /tools/mount_links.sh
-- запустить syncthing
-- запустить /home/etc/rc.local
-
-## Скрипт клонирования
+## Скрипт клонирования ОС
 
 Список игнорирования
 - /root/.ecryptfs
 - /home/
-
-## Прочие настройки
-
-- /etc/rsyncd.conf.rescue - файл-шаблон для клонирования системы с текущего устройства
-- /etc/rsyncd.pass.rescue - пароль к нему
-
-## Миграция
-- ~/syncthing/ to /home/data/sync/
-- ~/0-work/ to /home/data/work/
-- /home/data/work/tools/ to /tools/
-- Update Syncthing config paths
-- Update Unison paths
-- bash /home/data/sync/tools/mount_dirs.sh
-- Unison
-- Start Syncthing
-- Установить имя пользователя и пароль Syncthing - http://127.0.0.1:8384/
-- Set default path - /home/data/sync
-- Добавить master (и cloud?), поставить опцию автоматичски добавлять новые шары.
