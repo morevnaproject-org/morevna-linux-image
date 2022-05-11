@@ -3,14 +3,70 @@
 - hosts: localhost
   remote_user: root
   tasks:
-  - name: Update cache and install packages
+  - name: Desktop (Plasma)
     apt_rpm:
       state: present
       update_cache: yes
+      name: 
+       - plasma5-desktop
+       - libgtk-engines-default
+       - icon-theme-oxygen
+       - qt5ct
+       - tango-icon-theme
+       - gtk-theme-breeze
+       - kde5-autofs-shares
+       - kde5-filelight
+       - kde5-display-manager-lightdm
+       - kde5-dolphin-plugins
+       - kde5-graphics-thumbnailers
+       - kde5-kfind
+       - kde5-kcalc
+       - kde5-kmag
+       - kde5-kompare
+       - kde5-mini
+       - kde5-network-filesharing
+       - kde5-network-manager-4-nm
+       - kde5-plasma-settings
+       - kde5-spectacle
+       - kde5-video-player-smplayer
+       - plasma5-bluedevil
+       - plasma5-breeze
+       - plasma5-discover-maxi
+       - plasma5-kde-gtk-config
+       - plasma5-kscreen
+  - name: Multimedia Apps
+    apt_rpm:
+      state: present
+      update_cache: no
+      name: 
+       - audacity
+       - gimp
+  - name: Office Apps
+    apt_rpm:
+      state: present
+      update_cache: no
+      name: 
+       - firefox-esr
+       - LibreOffice-langpack-ru
+       - LibreOffice-qt5
+       - hunspell-ru-lebedev
+       - remmina-plugins
+  - name: Base utilities
+    apt_rpm:
+      state: present
+      update_cache: no
+      name: 
+       - bindfs
+       - git
+  - name: NFS server/client
+    apt_rpm:
+      state: present
+      update_cache: no
       name: 
        - bindfs
        - nfs-clients
        - nfs-server
        - nfs-utils
        - cachefilesd
-# ecryptfs-utils
+
+# ecryptfs-utils - present in kernel
