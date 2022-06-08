@@ -34,6 +34,77 @@
        - plasma5-discover-maxi
        - plasma5-kde-gtk-config
        - plasma5-kscreen
+  - name: Desktop (Mate)
+    apt_rpm:
+      state: present
+      update_cache: yes
+      name: 
+       - mate-applets
+       - mate-control-center
+       - mate-desktop
+       - mate-media
+       - mate-menus
+       - mate-notification-daemon
+       - mate-panel
+       - mate-polkit
+       - mate-session
+       - mate-settings-daemon
+       - mate-window-manager
+       - yelp
+       - mate-user-guide
+       - mate-system-monitor
+       - dconf-editor
+       - gucharmap
+       - mate-calc
+       - mate-image-viewer
+       - parcellite
+       - mate-menu-editor
+       - mate-power-manager
+       - mate-backgrounds
+       - mate-system-log
+       - gnome-keyring
+       - seahorse
+       - mate-utils
+       - mate-sensors-applet
+       - mate-file-manager
+       - mate-file-manager-actions
+       - mate-file-manager-beesu
+       - mate-file-manager-extensions
+       - mate-file-manager-image-converter
+       - mate-file-manager-open-terminal
+       - mate-file-manager-sendto
+       - mate-file-manager-share
+       - mate-file-manager-wallpaper
+       - gvfs
+       - mate-terminal
+       - mate-file-manager-archiver
+       - mate-text-editor
+       - mate-document-viewer
+       - mate-document-viewer-djvu
+       - mate-document-viewer-thumbnailer
+       - mate-document-viewer-caja
+       - mate-icon-theme
+       - mate-themes
+       - libgtk2-engine-adwaita
+       - mate-screensaver
+       - iso-codes
+       - tzdata
+       - pavucontrol
+       - parcellite
+       - NetworkManager-applet-gtk
+       - NetworkManager-openvpn-gtk
+       - NetworkManager-pptp-gtk
+       - NetworkManager-vpnc-gtk
+       - NetworkManager-l2tp-gtk
+       - NetworkManager-openconnect-gtk
+       - NetworkManager
+       - NetworkManager-gnome
+       - NetworkManager-l2tp-gnome
+       - rfkill
+       - dbus-tools-gui
+       - fonts-otf-mozilla-fira
+       - xdg-user-dirs
+       - notification-daemon
   - name: Multimedia Apps
     apt_rpm:
       state: present
