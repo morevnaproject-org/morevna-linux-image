@@ -34,13 +34,15 @@
        - plasma5-discover-maxi
        - plasma5-kde-gtk-config
        - plasma5-kscreen
+       - plasma5-theme-qogir
   - name: Desktop (Mate)
     apt_rpm:
       state: present
       update_cache: yes
       name: 
        - branding-alt-workstation-mate-settings
-       - gtk-themes-mint
+       - gtk-theme-qogir
+       - icon-theme-qogir
        - mate-applets
        - mate-control-center
        - mate-desktop
