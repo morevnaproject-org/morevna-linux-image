@@ -19,8 +19,8 @@ if [ `id -u` != 0 ]; then
 fi
 
 apt-get update
-apt-get install -y \
-    nextcloud-client \
+
+PACKAGES="nextcloud-client \
     audacity \
     bindfs cachefilesd samba-client \
     calf-plugins sox \
@@ -35,16 +35,22 @@ apt-get install -y \
     peek \
     mypaint \
     firefox \
-    # for renderchan
-    python3-modules-sqlite3 \
-    revelation \
+	revelation \
     unison \
-    #== Приятные украшательства ==
-    # Desktop theme
+"
+
+#for renderchan 
+PACKAGES="$PACKAGES python3-modules-sqlite3"
+
+#== Приятные украшательства ==
+PACKAGES="$PACKAGES \
     gtk-theme-qogir \
     icon-theme-qogir \
-    # Welcome screen
     lightdm-settings
+"
+
+apt-get install -y $PACKAGES
+
 
 # Extra soft
 apt-get install -y eepm alien
