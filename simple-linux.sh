@@ -76,6 +76,8 @@ epm play anydesk
 #== KRA / ORA Thumbnailers
 wget https://moritzmolch.com/blog/files/1749/mmolch-thumbnailers.sh -O /tmp/mmolch-thumbnailers.sh && chmod +x /tmp/mmolch-thumbnailers.sh && /tmp/mmolch-thumbnailers.sh
 
+#== 0install
+curl -O https://get.0install.net/0install.sh && chmod +x 0install.sh install local && ./0install.sh && rm -f ./0install.sh
 
 #== Tablet config
 #sudo apt-get install python-module-pygtk
