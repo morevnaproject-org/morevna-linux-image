@@ -10,8 +10,8 @@
 #https://www.altlinux.org/Grub#%D0%A1%D0%BF%D0%BE%D1%81%D0%BE%D0%B1_1
 
 # Users
-#- anim
-#- morevna
+#- anim (1001)
+#- morevna (2222)
 
 if [ `id -u` != 0 ]; then
     echo "ERROR: You have to be root to run the script."
