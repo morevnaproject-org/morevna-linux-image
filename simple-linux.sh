@@ -34,8 +34,8 @@ PACKAGES="nextcloud-client \
     obs-studio \
     peek \
     mypaint \
-    firefox \
-	revelation \
+    firefox chromium \
+    revelation \
     unison \
 "
 
