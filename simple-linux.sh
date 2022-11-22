@@ -37,6 +37,7 @@ PACKAGES="nextcloud-client \
     firefox chromium \
     revelation \
     unison \
+    x11vnc tk remmina remmina-plugins \
 "
 
 #for renderchan 
