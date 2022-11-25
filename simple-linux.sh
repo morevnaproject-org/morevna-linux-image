@@ -38,6 +38,7 @@ PACKAGES="nextcloud-client \
     revelation \
     unison \
     x11vnc tk remmina remmina-plugins \
+    vlc \
 "
 
 #for renderchan 
