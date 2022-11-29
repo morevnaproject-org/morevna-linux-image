@@ -56,9 +56,9 @@ apt-get install -y $PACKAGES
 
 # Extra soft
 apt-get install -y eepm alien
-epm play zoom
-epm play discord
-epm play anydesk
+rpm -qv zoom || epm play zoom
+rpm -qv discord || epm play discord
+rpm -qv anydesk || epm play anydesk
 
 # gocryptfs
 #apt-get install golang
