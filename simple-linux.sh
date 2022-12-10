@@ -29,6 +29,7 @@ PACKAGES="nextcloud-client \
     geany \
     gparted \
     pavucontrol \
+    shotcut \
     shutter \
     xterm \
     obs-studio \
